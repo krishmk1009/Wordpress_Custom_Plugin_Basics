@@ -19,6 +19,7 @@ if(isset($_POST["Regsiter"])){
 
         if(!is_wp_error($result)){
             echo "user created succesfully with Id:".$result;
+            update_user_meta($result , "show_admin_bar_front" , false);
         }
         else{
             echo $result->get_error_message();
@@ -31,15 +32,7 @@ if(isset($_POST["Regsiter"])){
 
 ?>
 
-<div>
-    <h1>Login</h1>
-    <form action="" method="POST">
-    Username: <input type="text" name="user_username" id="username_input" /> <br/>
-    Password: <input type="password" name="user_password" id="password_input" /> <br/>
-    <input type="submit" id="submit_button"  name="Login"/>
 
-    </form>
-</div>
 <br/>
 
 <h1>Register</h1>

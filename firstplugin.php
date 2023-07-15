@@ -281,13 +281,21 @@ add_action("init", "register_car_types");
 
 // ---------------------------------------------------------------------------
 
-// create user page
+// create user page with registration functionality
 function my_create_user_fun(){
     ob_start();
     include "public/register.php";
     return ob_get_clean();
 }
 add_shortcode("ct_user_code" , "my_create_user_fun");
+// ---------------------------------------------------------------------------
+// create user page with login functionality
+function my_login_user_fun(){
+    ob_start();
+    include "public/login.php";
+    return ob_get_clean();
+}
+add_shortcode("ct_login_user" , "my_login_user_fun");
 
 // --------------------------------------------------------------------------------------
 
@@ -327,3 +335,36 @@ add_action("template_redirect" , "my_user_login_fun");
 
 
 // --------------------------------------------------------------------------------------
+function my_user_profile_fun(){
+ob_start();
+include "public/profile.php";
+return ob_get_clean();
+}
+add_shortcode("ct_profile_code" , "my_user_profile_fun");
+
+// -------------------------------------------------------------------------------------------
+
+// Handle website redirects
+function my_redirect_handle_fun(){
+$is_user_logged_in = is_user_logged_in();
+
+if($is_user_logged_in && (is_page("register") || is_page("login")) ){
+    wp_redirect(site_url("user-profile"));
+    exit();
+}
+else if(!$is_user_logged_in && (is_page("user-profile"))){
+    wp_redirect(site_url("login"));
+    exit();
+}
+
+}
+add_action("template_redirect", "my_redirect_handle_fun");
+
+// --------------------------------------------------------------------------------------
+// create a hook for logout action with redirectaion
+function my_logout_fun(){
+    wp_redirect(site_url("login"));
+    exit();
+}
+add_action("wp_logout" , "my_logout_fun");
+
