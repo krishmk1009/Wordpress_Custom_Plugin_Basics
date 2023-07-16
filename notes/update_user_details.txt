@@ -9,7 +9,8 @@ if_wp_error() --- check whether its generating error if not then succefully upda
 get_userdata(userID)--- gives all the user data , If it returns false then there is no user if not then try to acess the detials with get_usermeta(is, key);
 
 
-
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
 
 //user Profile Image tutorial and its functions
@@ -27,3 +28,9 @@ metadata_exists('user' , $user_id , 'user_profile_img_url')
 add_user_meta($user_id , "user_profile_img_url" , $image['url']);
 update_user_meta($user_id , "user_profile_img_url" , $image['url']);
 $imagePath = get_usermeta($user_id , "user_profile_img_path");
+
+-----------------------------------------------------------------
+
+Delete a file from the server
+
+wp_delete_file($filePath);

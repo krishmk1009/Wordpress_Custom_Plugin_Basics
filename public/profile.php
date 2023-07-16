@@ -2,7 +2,7 @@
  
 $user_id = get_current_user_id();
 $fname = get_usermeta($user_id, "first_name");
-$imagePath = get_usermeta($user_id , "user_profile_img_path");
+
 $imageUrl = get_usermeta($user_id , "user_profile_img_url");
 
 
@@ -16,13 +16,17 @@ if(isset($_POST["Update"])) {
             $ext= explode("/" , $file["type"])[1];
             $file_name= "$user_id.$ext";
 
-        $image = wp_upload_bits($file_name , null ,file_get_contents($file["tmp_name"]) );
+       
 
             if(!metadata_exists('user' , $user_id , 'user_profile_img_url')){
+                $image = wp_upload_bits($file_name , null ,file_get_contents($file["tmp_name"]) );
                 add_user_meta($user_id , "user_profile_img_url" , $image['url']);
                 add_user_meta($user_id , "user_profile_img_path" , esc_sql($image['file']));
                 // print_r($image);
             }else{
+                $imagePath = get_usermeta($user_id , "user_profile_img_path");
+                wp_delete_file($imagePath);
+                $image = wp_upload_bits($file_name , null ,file_get_contents($file["tmp_name"]) );
                 update_user_meta($user_id , "user_profile_img_url" , $image['url']);
                 update_user_meta($user_id , "user_profile_img_path" , esc_sql($image['file']));
                 // print_r($image);
