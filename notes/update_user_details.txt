@@ -1,0 +1,29 @@
+//update user details
+
+get_current_user_id()- -- gives the id of the current user;
+
+wp_update_user($userDetails) ---- $userDetails= array("ID" => $user_id, info according to the table);   this returns the result
+
+if_wp_error() --- check whether its generating error if not then succefully updated
+
+get_userdata(userID)--- gives all the user data , If it returns false then there is no user if not then try to acess the detials with get_usermeta(is, key);
+
+
+
+
+
+//user Profile Image tutorial and its functions
+
+enctype="multipart/form-data" -- In the form
+wp_upload_bits($file_name , null ,get_file_contents( $file['tmp_name'));
+used to change the temporary path
+
+
+explode(seperator , file_attribute) ==> this will return the array of words separated by separator suppose type/png ==> type, png as a array
+
+
+
+metadata_exists('user' , $user_id , 'user_profile_img_url')
+add_user_meta($user_id , "user_profile_img_url" , $image['url']);
+update_user_meta($user_id , "user_profile_img_url" , $image['url']);
+$imagePath = get_usermeta($user_id , "user_profile_img_path");
