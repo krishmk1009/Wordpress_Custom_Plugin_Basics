@@ -34,3 +34,10 @@ $imagePath = get_usermeta($user_id , "user_profile_img_path");
 Delete a file from the server
 
 wp_delete_file($filePath);
+
+
+-----------------------------------------------------------------
+Use options table
+$option_value = get_option('option_name');
+add_option
+update_option

@@ -1,10 +1,8 @@
 <?php
-
-if(!defined('WP_UNINSTALL_PLUGIN')){
-    header("Location: /firstproject")
-    die();
-}
-
+if(!defined('ABSPATH')){
+    header("Location: /mycontactformplugin");
+    die("");
+ }
 
 global $wpdb , $table_prefix;
     $wp_emp = $table_prefix."emp";
